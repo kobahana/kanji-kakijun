@@ -232,15 +232,8 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
           )}
         </div>
 
-        {/* Bottom section: divider + buttons + breakdown */}
-        <div className="flex flex-col gap-4 sm:gap-6 mt-auto pb-2 sm:pb-0">
-          {/* Thin divider */}
-          <div className="flex items-center gap-3 mt-1 sm:mt-4">
-            <div className="h-px bg-border flex-1" />
-            <div className="w-1.5 h-1.5 bg-accent/40 rounded-full" />
-            <div className="h-px bg-border flex-1" />
-          </div>
-
+        {/* Bottom section: buttons + breakdown */}
+        <div className="flex flex-col gap-4 sm:gap-8 mt-auto pb-2 sm:pb-0">
           {/* Action buttons */}
           <div className="flex items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0">
             <Button

@@ -40,6 +40,7 @@ export function KanjiStroke({
   const [showNumber, setShowNumber] = useState(false)
   const [numberPos, setNumberPos] = useState({ x: 0, y: 0 })
   const dashOffset = useMotionValue(0)
+  const [readyToAnimate, setReadyToAnimate] = useState(false)
 
   // Measure path length after mount
   useEffect(() => {
@@ -55,15 +56,23 @@ export function KanjiStroke({
       
       const pt = measureRef.current.getPointAtLength(0)
       setNumberPos({ x: pt.x, y: pt.y })
+
+      // Mark as ready so we can safely show the animating path
+      setReadyToAnimate(true)
     }
   }, [pathData, animating, dashOffset])
+
+  // Reset ready state when path data changes
+  useEffect(() => {
+    setReadyToAnimate(false)
+  }, [pathData])
 
   // Holds the framer-motion animation controls so we can stop on cleanup
   const animControls = useRef<{ stop: () => void } | null>(null)
 
   // Run the drawing animation when this stroke becomes active
   useEffect(() => {
-    if (!animating || pathLength === 0) return
+    if (!animating || pathLength === 0 || !readyToAnimate) return
 
     // 1. Show the number badge immediately at the stroke start-point
     setShowNumber(true)
@@ -87,7 +96,7 @@ export function KanjiStroke({
       animControls.current?.stop()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animating, pathLength, strokeDuration])
+  }, [animating, pathLength, strokeDuration, readyToAnimate])
 
   // Hide number badge when no longer animating
   useEffect(() => {
@@ -123,7 +132,7 @@ export function KanjiStroke({
           )}
 
           {/* Animated drawing stroke */}
-          {animating && pathLength > 0 && (
+          {animating && pathLength > 0 && readyToAnimate && (
             <motion.path
               d={pathData}
               fill="none"
