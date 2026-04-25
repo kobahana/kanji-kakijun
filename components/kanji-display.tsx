@@ -115,12 +115,12 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
       </div>
 
       {/* Body — flex-1 to take all space */}
-      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col justify-between p-4 sm:p-8 gap-4 sm:gap-6">
+      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col p-4 sm:p-8 gap-4 sm:gap-8">
 
         {/* Top section: furigana + canvases + romaji */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-4 min-h-0">
+        <div className="flex-1 flex flex-col items-center justify-center gap-4 sm:gap-8 min-h-0 pt-2 sm:pt-0">
           {/* Furigana */}
-          <p className="text-base sm:text-2xl text-primary/70 tracking-[0.4em] sm:tracking-[0.6em] font-sans text-center">
+          <p className="text-sm sm:text-2xl text-primary/70 tracking-[0.4em] sm:tracking-[0.6em] font-sans text-center">
             {prefecture.furigana}
           </p>
 
@@ -215,7 +215,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
           </div>
 
           {/* Romaji */}
-          <p className="text-2xl sm:text-4xl text-muted-foreground tracking-[0.2em] uppercase font-sans text-center font-light mt-4">
+          <p className="text-xl sm:text-4xl text-muted-foreground tracking-[0.2em] uppercase font-sans text-center font-light mt-2 sm:mt-6">
             {prefecture.romaji}
           </p>
 
@@ -233,31 +233,30 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
         </div>
 
         {/* Bottom section: divider + buttons + breakdown */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4 sm:gap-6 mt-auto pb-2 sm:pb-0">
           {/* Thin divider */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 mt-1 sm:mt-4">
             <div className="h-px bg-border flex-1" />
             <div className="w-1.5 h-1.5 bg-accent/40 rounded-full" />
             <div className="h-px bg-border flex-1" />
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0">
             <Button
               onClick={playAnimation}
               disabled={animState === "playing"}
-              className="bg-accent hover:bg-accent/90 text-accent-foreground px-10 py-7 h-auto gap-3 shadow-lg hover:shadow-xl transition-all disabled:opacity-60 text-lg rounded-2xl"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 sm:px-10 py-4 sm:py-7 h-auto gap-2 sm:gap-3 shadow-lg hover:shadow-xl transition-all disabled:opacity-60 text-base sm:text-lg rounded-xl sm:rounded-2xl flex-1 sm:flex-initial"
             >
               {animState === "playing" ? (
                 <>
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                  <span>アニメーション中…</span>
+                  <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" />
+                  <span className="text-sm sm:text-lg">再生中...</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-6 h-6 fill-current" />
-                  <span>書き順を再生</span>
-                  <span className="text-accent-foreground/70 text-sm hidden sm:inline">Play</span>
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
+                  <span className="text-sm sm:text-lg">書き順を再生</span>
                 </>
               )}
             </Button>
@@ -266,25 +265,25 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
               <Button
                 variant="outline"
                 onClick={resetAnimation}
-                className="px-6 py-7 h-auto gap-2 text-lg rounded-2xl border-2"
+                className="px-4 sm:px-6 py-4 sm:py-7 h-auto gap-2 text-base sm:text-lg rounded-xl sm:rounded-2xl border-2"
               >
-                <RotateCcw className="w-5 h-5" />
-                <span>リセット</span>
+                <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-lg">リセット</span>
               </Button>
             )}
           </div>
 
           {/* Character breakdown — compact */}
-          <div className="pt-4 border-t border-border">
-            <p className="text-sm font-medium text-muted-foreground mb-4 text-center">
+          <div className="pt-2 sm:pt-4 border-t border-border">
+            <p className="text-[10px] sm:text-sm font-medium text-muted-foreground mb-2 sm:mb-4 text-center">
               漢字の内訳 / Breakdown
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
               {chars.map((char, index) => (
                 <div
                   key={index}
                   className={cn(
-                    "flex items-center justify-center w-16 h-16 rounded-xl border-2 transition-all duration-300",
+                    "flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl border-2 transition-all duration-300",
                     animState === "idle"
                       ? "border-border bg-card"
                       : doneChars.has(index)
@@ -294,7 +293,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                       : "border-border bg-muted/30"
                   )}
                 >
-                  <span className="text-3xl font-serif">{char}</span>
+                  <span className="text-xl sm:text-3xl font-serif">{char}</span>
                 </div>
               ))}
             </div>
