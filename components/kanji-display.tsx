@@ -114,11 +114,11 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
         </div>
       </div>
 
-      {/* Body — flex-1 to take all space */}
-      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col p-4 sm:p-8 gap-4 sm:gap-8">
+      {/* Body — centralized container for all content */}
+      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center justify-center p-4 sm:p-10 gap-8 sm:gap-12">
 
         {/* Top section: furigana + canvases + romaji */}
-        <div className="flex-1 flex flex-col items-center justify-start sm:justify-center gap-4 sm:gap-8 min-h-0 pt-6 sm:pt-10">
+        <div className="flex flex-col items-center justify-center gap-4 sm:gap-8 min-h-0">
           {/* Furigana */}
           <p className="text-sm sm:text-2xl text-primary/70 tracking-[0.4em] sm:tracking-[0.6em] font-sans text-center">
             {prefecture.furigana}
@@ -233,7 +233,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
         </div>
 
         {/* Bottom section: buttons + breakdown */}
-        <div className="flex flex-col gap-4 sm:gap-8 mt-auto pb-2 sm:pb-0">
+        <div className="flex flex-col gap-4 sm:gap-10 pb-2 sm:pb-0">
           {/* Action buttons */}
           <div className="flex items-center justify-center gap-3 sm:gap-4 px-2 sm:px-0">
             <Button
