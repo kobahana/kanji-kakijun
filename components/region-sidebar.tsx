@@ -38,6 +38,9 @@ export function RegionSidebar({ selectedRegion, onSelectRegion }: RegionSidebarP
             )}
           >
             <span className="block text-base">{region.name}</span>
+            <span className="block text-[10px] text-sidebar-foreground/60 mt-0.5">
+              {region.nameKana}
+            </span>
           </button>
         ))}
       </nav>

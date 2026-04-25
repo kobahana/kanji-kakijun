@@ -45,7 +45,7 @@ export default function Home() {
         </div>
         <div className="hidden lg:block text-right shrink-0">
           <p className="text-xs text-muted-foreground">日本語を学ぶ留学生のための</p>
-          <p className="text-[10px] text-muted-foreground/60">にほんごをまなぶひとたちのための</p>
+          <p className="text-[10px] text-muted-foreground/60">にほんごをまなぶりゅうがくせいのための</p>
         </div>
       </header>
 

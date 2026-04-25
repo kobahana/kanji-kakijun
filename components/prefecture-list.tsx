@@ -40,13 +40,22 @@ export function PrefectureList({
                 : "border-border"
             )}
           >
-            <span className="text-lg font-semibold text-foreground">
-              {prefecture.name
-                .replace("県", "")
-                .replace("都", "")
-                .replace("府", "")
-                .replace("道", "")}
-            </span>
+            <div className="flex flex-col items-start leading-tight">
+              <span className="text-lg font-semibold text-foreground">
+                {prefecture.name
+                  .replace("県", "")
+                  .replace("都", "")
+                  .replace("府", "")
+                  .replace("道", "")}
+              </span>
+              <span className="text-[10px] text-muted-foreground mt-0.5">
+                {prefecture.furigana
+                  .replace("けん", "")
+                  .replace("と", "")
+                  .replace("ふ", "")
+                  .replace("どう", "")}
+              </span>
+            </div>
           </button>
         ))}
       </div>

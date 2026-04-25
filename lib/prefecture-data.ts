@@ -9,6 +9,7 @@ export interface Region {
   id: string
   name: string
   nameEn: string
+  nameKana: string // Added for Hiragana support
   prefectures: Prefecture[]
 }
 
@@ -17,6 +18,7 @@ export const regions: Region[] = [
     id: "hokkaido",
     name: "北海道地方",
     nameEn: "Hokkaido",
+    nameKana: "ほっかいどうちほう",
     prefectures: [
       { name: "北海道", romaji: "Hokkaido", furigana: "ほっかいどう", characters: ["北", "海", "道"] },
     ],
@@ -25,6 +27,7 @@ export const regions: Region[] = [
     id: "tohoku",
     name: "東北地方",
     nameEn: "Tohoku",
+    nameKana: "とうほくちほう",
     prefectures: [
       { name: "青森県", romaji: "Aomori", furigana: "あおもりけん", characters: ["青", "森", "県"] },
       { name: "岩手県", romaji: "Iwate", furigana: "いわてけん", characters: ["岩", "手", "県"] },
@@ -38,13 +41,14 @@ export const regions: Region[] = [
     id: "kanto",
     name: "関東地方",
     nameEn: "Kanto",
+    nameKana: "かんとうちほう",
     prefectures: [
       { name: "茨城県", romaji: "Ibaraki", furigana: "いばらきけん", characters: ["茨", "城", "県"] },
       { name: "栃木県", romaji: "Tochigi", furigana: "とちぎけん", characters: ["栃", "木", "県"] },
       { name: "群馬県", romaji: "Gunma", furigana: "ぐんまけん", characters: ["群", "馬", "県"] },
       { name: "埼玉県", romaji: "Saitama", furigana: "さいたまけん", characters: ["埼", "玉", "県"] },
       { name: "千葉県", romaji: "Chiba", furigana: "ちばけん", characters: ["千", "葉", "県"] },
-      { name: "東京都", romaji: "Tokyo", furigana: "とうきょうと", characters: ["東", "京", "都"] },
+      { name: "東京都", romaji: "Tokyo", furigana: "とうきょうと", characters: ["東", "京", "調"] },
       { name: "神奈川県", romaji: "Kanagawa", furigana: "かながわけん", characters: ["神", "奈", "川", "県"] },
     ],
   },
@@ -52,6 +56,7 @@ export const regions: Region[] = [
     id: "chubu",
     name: "中部地方",
     nameEn: "Chubu",
+    nameKana: "ちゅうぶちほう",
     prefectures: [
       { name: "新潟県", romaji: "Niigata", furigana: "にいがたけん", characters: ["新", "潟", "県"] },
       { name: "富山県", romaji: "Toyama", furigana: "とやまけん", characters: ["富", "山", "県"] },
@@ -68,6 +73,7 @@ export const regions: Region[] = [
     id: "kinki",
     name: "近畿地方",
     nameEn: "Kinki",
+    nameKana: "きんきちほう",
     prefectures: [
       { name: "三重県", romaji: "Mie", furigana: "みえけん", characters: ["三", "重", "県"] },
       { name: "滋賀県", romaji: "Shiga", furigana: "しがけん", characters: ["滋", "賀", "県"] },
@@ -82,6 +88,7 @@ export const regions: Region[] = [
     id: "chugoku",
     name: "中国地方",
     nameEn: "Chugoku",
+    nameKana: "ちゅうごくちほう",
     prefectures: [
       { name: "鳥取県", romaji: "Tottori", furigana: "とっとりけん", characters: ["鳥", "取", "県"] },
       { name: "島根県", romaji: "Shimane", furigana: "しまねけん", characters: ["島", "根", "県"] },
@@ -94,6 +101,7 @@ export const regions: Region[] = [
     id: "shikoku",
     name: "四国地方",
     nameEn: "Shikoku",
+    nameKana: "しこくちほう",
     prefectures: [
       { name: "徳島県", romaji: "Tokushima", furigana: "とくしまけん", characters: ["徳", "島", "県"] },
       { name: "香川県", romaji: "Kagawa", furigana: "かがわけん", characters: ["香", "川", "県"] },
@@ -105,6 +113,7 @@ export const regions: Region[] = [
     id: "kyushu",
     name: "九州・沖縄地方",
     nameEn: "Kyushu & Okinawa",
+    nameKana: "きゅうしゅう・おきなわちほう",
     prefectures: [
       { name: "福岡県", romaji: "Fukuoka", furigana: "ふくおかけん", characters: ["福", "岡", "県"] },
       { name: "佐賀県", romaji: "Saga", furigana: "さがけん", characters: ["佐", "賀", "県"] },
