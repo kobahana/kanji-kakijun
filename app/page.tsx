@@ -37,15 +37,12 @@ export default function Home() {
         </div>
         <div className="flex-1 min-w-0">
           <h1 className="font-semibold text-foreground text-base leading-tight">
-            都道府県の漢字学習
+            とどうふけんのかんじ学習
           </h1>
-          <p className="text-xs text-muted-foreground hidden sm:block">
-            Prefecture Kanji Learning
-          </p>
         </div>
         <div className="hidden lg:block text-right shrink-0">
-          <p className="text-xs text-muted-foreground">日本語を学ぶ留学生のための</p>
-          <p className="text-xs text-muted-foreground/60">For International Students</p>
+          <p className="text-xs text-muted-foreground">にほんごをまなぶひとたちのための</p>
+          <p className="text-xs text-muted-foreground/60">かんじかきじゅんアプリ</p>
         </div>
       </header>
 
@@ -98,9 +95,9 @@ export default function Home() {
         <nav className="shrink-0 border-t border-border bg-card flex safe-bottom">
           {(
             [
-              { id: "region" as MobileTab, Icon: MapPin,  label: "地方" },
-              { id: "pref"   as MobileTab, Icon: List,    label: "都道府県" },
-              { id: "kanji"  as MobileTab, Icon: PenLine, label: "書き順" },
+              { id: "region" as MobileTab, Icon: MapPin,  label: "ちほう" },
+              { id: "pref"   as MobileTab, Icon: List,    label: "とどうふけん" },
+              { id: "kanji"  as MobileTab, Icon: PenLine, label: "かきじゅん" },
             ] as const
           ).map(({ id, Icon, label }) => (
             <button

@@ -45,6 +45,18 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
     setDoneChars(new Set())
   }, [prefecture, animState])
 
+  const playSpecificChar = useCallback((charIdx: number) => {
+    if (!prefecture || animState === "playing") return
+    setAnimState("playing")
+    setCurrentCharIdx(charIdx)
+    // Mark previous characters as done
+    const prevDone = new Set<number>()
+    for (let i = 0; i < charIdx; i++) {
+      prevDone.add(i)
+    }
+    setDoneChars(prevDone)
+  }, [prefecture, animState])
+
   const resetAnimation = useCallback(() => {
     setAnimState("idle")
     setCurrentCharIdx(-1)
@@ -75,10 +87,10 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
             <span className="text-3xl text-muted-foreground">漢</span>
           </div>
           <h3 className="text-base font-medium text-foreground mb-1">
-            都道府県を選択してください
+            とどうふけんをえらんでください
           </h3>
           <p className="text-sm text-muted-foreground">
-            Select a prefecture to start learning
+            えらんだ都道府県の漢字がここにでます
           </p>
         </div>
       </div>
@@ -97,7 +109,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
     const padding = 48 // p-6 total
     const gaps = (chars.length - 1) * 8
     const available = windowWidth - padding - gaps
-    canvasSize = Math.min(140, Math.floor(available / chars.length))
+    canvasSize = Math.min(130, Math.floor(available / chars.length))
   } else {
     canvasSize = chars.length >= 4 ? 200 : chars.length === 3 ? 240 : chars.length === 2 ? 280 : 320
   }
@@ -106,7 +118,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
     <div className="h-full bg-card rounded-xl border border-border overflow-hidden flex flex-col">
       {/* Card header bar */}
       <div className="bg-primary/5 border-b border-border px-4 py-2.5 shrink-0 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">学習中 / Now Learning</span>
+        <span className="text-xs text-muted-foreground">べんきょうちゅう</span>
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-accent/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-accent/40" />
@@ -115,12 +127,12 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
       </div>
 
       {/* Body — centralized container for all content */}
-      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center justify-center p-4 sm:p-10 gap-8 sm:gap-12">
+      <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center justify-center p-4 sm:p-10 gap-6 sm:gap-10">
 
-        {/* Top section: furigana + canvases + romaji */}
-        <div className="flex flex-col items-center justify-center gap-4 sm:gap-8 min-h-0">
+        {/* Top section: furigana + canvases */}
+        <div className="flex flex-col items-center justify-center gap-4 sm:gap-10 min-h-0">
           {/* Furigana */}
-          <p className="text-sm sm:text-2xl text-primary/70 tracking-[0.4em] sm:tracking-[0.6em] font-sans text-center">
+          <p className="text-sm sm:text-3xl text-primary/70 tracking-[0.4em] sm:tracking-[0.8em] font-sans text-center">
             {prefecture.furigana}
           </p>
 
@@ -194,18 +206,18 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                   {/* Status badge below canvas */}
                   <div className="h-6 flex items-center justify-center">
                     {isAnimating && (
-                      <span className="flex items-center gap-1.5 text-xs text-accent font-medium bg-accent/5 px-2 py-0.5 rounded-full">
-                        <Loader2 className="w-3 h-3 animate-spin" />
-                        書き中...
+                      <span className="flex items-center gap-1.5 text-[10px] sm:text-xs text-accent font-medium bg-accent/5 px-2 py-0.5 rounded-full">
+                        <Loader2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 animate-spin" />
+                        かきじゅう...
                       </span>
                     )}
                     {isDone && animState !== "idle" && (
                       <motion.span
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="text-xs text-primary/60 font-medium"
+                        className="text-[10px] sm:text-xs text-primary/60 font-medium"
                       >
-                        ✓ 完了
+                        ✓ おわり
                       </motion.span>
                     )}
                   </div>
@@ -214,11 +226,6 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
             })}
           </div>
 
-          {/* Romaji */}
-          <p className="text-xl sm:text-4xl text-muted-foreground tracking-[0.2em] uppercase font-sans text-center font-light mt-2 sm:mt-6">
-            {prefecture.romaji}
-          </p>
-
           {/* Completion banner */}
           {animState === "done" && (
             <motion.div
@@ -226,7 +233,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
               animate={{ opacity: 1, y: 0 }}
             >
               <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
-                🎉 書き順を完成しました！
+                🎉 かんせい！じょうずにかけました。
               </span>
             </motion.div>
           )}
@@ -244,12 +251,12 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
               {animState === "playing" ? (
                 <>
                   <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" />
-                  <span className="text-sm sm:text-lg">再生中...</span>
+                  <span className="text-sm sm:text-lg">さいせいちゅう...</span>
                 </>
               ) : (
                 <>
                   <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-                  <span className="text-sm sm:text-lg">書き順を再生</span>
+                  <span className="text-sm sm:text-lg">かきじゅんをみる</span>
                 </>
               )}
             </Button>
@@ -261,22 +268,25 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                 className="px-4 sm:px-6 py-4 sm:py-7 h-auto gap-2 text-base sm:text-lg rounded-xl sm:rounded-2xl border-2"
               >
                 <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span className="text-sm sm:text-lg">リセット</span>
+                <span className="text-sm sm:text-lg">はじめから</span>
               </Button>
             )}
           </div>
 
-          {/* Character breakdown — compact */}
+          {/* Character breakdown — interactive */}
           <div className="pt-2 sm:pt-4 border-t border-border">
             <p className="text-[10px] sm:text-sm font-medium text-muted-foreground mb-2 sm:mb-4 text-center">
-              漢字の内訳 / Breakdown
+              かんじをえらんで スタートできます
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
               {chars.map((char, index) => (
-                <div
+                <button
                   key={index}
+                  onClick={() => playSpecificChar(index)}
+                  disabled={animState === "playing"}
                   className={cn(
                     "flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl border-2 transition-all duration-300",
+                    "hover:border-accent hover:bg-accent/5 disabled:hover:border-border disabled:hover:bg-transparent",
                     animState === "idle"
                       ? "border-border bg-card"
                       : doneChars.has(index)
@@ -285,9 +295,10 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                       ? "border-accent/60 bg-accent/10 animate-pulse"
                       : "border-border bg-muted/30"
                   )}
+                  title={`${char}からスタート`}
                 >
                   <span className="text-xl sm:text-3xl font-serif">{char}</span>
-                </div>
+                </button>
               ))}
             </div>
           </div>

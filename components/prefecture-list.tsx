@@ -20,7 +20,7 @@ export function PrefectureList({
       <div className="px-4 py-3 border-b border-border shrink-0">
         <h3 className="font-semibold text-sm text-foreground">{region.name}</h3>
         <p className="text-muted-foreground text-xs mt-0.5">
-          {region.prefectures.length} prefectures
+          {region.prefectures.length} とどうふけん
         </p>
       </div>
 
@@ -46,9 +46,6 @@ export function PrefectureList({
                 .replace("都", "")
                 .replace("府", "")
                 .replace("道", "")}
-            </span>
-            <span className="text-xs text-muted-foreground shrink-0 uppercase tracking-tighter">
-              {prefecture.romaji}
             </span>
           </button>
         ))}
