@@ -18,8 +18,8 @@ export function PrefectureList({
     <div className="h-full bg-card rounded-xl border border-border overflow-hidden flex flex-col">
       {/* Header */}
       <div className="px-4 py-3 border-b border-border shrink-0">
-        <h3 className="font-semibold text-sm text-foreground">{region.name}</h3>
-        <p className="text-muted-foreground text-xs mt-0.5">
+        <h3 className="font-semibold text-sm text-foreground">都道府県</h3>
+        <p className="text-muted-foreground text-[10px] mt-0.5">
           {region.prefectures.length} とどうふけん
         </p>
       </div>

@@ -16,8 +16,9 @@ export function RegionSidebar({ selectedRegion, onSelectRegion }: RegionSidebarP
       <div className="px-4 py-3 border-b border-sidebar-border shrink-0">
         <div className="flex items-center gap-2">
           <MapPin className="w-4 h-4 text-accent shrink-0" />
-          <h2 className="font-semibold text-sm">ちほうをえらぶ</h2>
+          <h2 className="font-semibold text-sm">地方を選ぶ</h2>
         </div>
+        <p className="text-sidebar-foreground/60 text-[10px] mt-0.5">ちほうをえらぶ</p>
       </div>
 
       {/* Scrollable list */}

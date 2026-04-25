@@ -37,12 +37,15 @@ export default function Home() {
         </div>
         <div className="flex-1 min-w-0">
           <h1 className="font-semibold text-foreground text-base leading-tight">
-            とどうふけんのかんじ学習
+            都道府県の漢字学習
           </h1>
+          <p className="text-[10px] text-muted-foreground leading-none mt-0.5">
+            とどうふけんのかんじがくしゅう
+          </p>
         </div>
         <div className="hidden lg:block text-right shrink-0">
-          <p className="text-xs text-muted-foreground">にほんごをまなぶひとたちのための</p>
-          <p className="text-xs text-muted-foreground/60">かんじかきじゅんアプリ</p>
+          <p className="text-xs text-muted-foreground">日本語を学ぶ留学生のための</p>
+          <p className="text-[10px] text-muted-foreground/60">にほんごをまなぶひとたちのための</p>
         </div>
       </header>
 
@@ -95,11 +98,11 @@ export default function Home() {
         <nav className="shrink-0 border-t border-border bg-card flex safe-bottom">
           {(
             [
-              { id: "region" as MobileTab, Icon: MapPin,  label: "ちほう" },
-              { id: "pref"   as MobileTab, Icon: List,    label: "とどうふけん" },
-              { id: "kanji"  as MobileTab, Icon: PenLine, label: "かきじゅん" },
+              { id: "region" as MobileTab, Icon: MapPin,  label: "地方", sub: "ちほう" },
+              { id: "pref"   as MobileTab, Icon: List,    label: "都道府県", sub: "とどうふけん" },
+              { id: "kanji"  as MobileTab, Icon: PenLine, label: "書き順", sub: "かきじゅん" },
             ] as const
-          ).map(({ id, Icon, label }) => (
+          ).map(({ id, Icon, label, sub }) => (
             <button
               key={id}
               onClick={() => setMobileTab(id)}
@@ -109,7 +112,10 @@ export default function Home() {
               )}
             >
               <Icon className="w-5 h-5" />
-              <span className="text-[11px] font-medium">{label}</span>
+              <div className="flex flex-col items-center leading-none">
+                <span className="text-[11px] font-bold">{label}</span>
+                <span className="text-[9px] mt-0.5 opacity-80">{sub}</span>
+              </div>
             </button>
           ))}
         </nav>

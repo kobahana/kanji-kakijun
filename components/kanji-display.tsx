@@ -46,7 +46,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
   }, [prefecture, animState])
 
   const playSpecificChar = useCallback((charIdx: number) => {
-    if (!prefecture || animState === "playing") return
+    if (!prefecture) return
     setAnimState("playing")
     setCurrentCharIdx(charIdx)
     // Mark previous characters as done
@@ -55,7 +55,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
       prevDone.add(i)
     }
     setDoneChars(prevDone)
-  }, [prefecture, animState])
+  }, [prefecture])
 
   const resetAnimation = useCallback(() => {
     setAnimState("idle")
@@ -87,11 +87,8 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
             <span className="text-3xl text-muted-foreground">漢</span>
           </div>
           <h3 className="text-base font-medium text-foreground mb-1">
-            とどうふけんをえらんでください
+            都道府県（とどうふけん）をえらんでください
           </h3>
-          <p className="text-sm text-muted-foreground">
-            えらんだ都道府県の漢字がここにでます
-          </p>
         </div>
       </div>
     )
@@ -118,7 +115,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
     <div className="h-full bg-card rounded-xl border border-border overflow-hidden flex flex-col">
       {/* Card header bar */}
       <div className="bg-primary/5 border-b border-border px-4 py-2.5 shrink-0 flex items-center justify-between">
-        <span className="text-xs text-muted-foreground">べんきょうちゅう</span>
+        <span className="text-xs text-muted-foreground">学習中（がくしゅうちゅう）</span>
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-accent/60" />
           <div className="w-2.5 h-2.5 rounded-full bg-accent/40" />
@@ -208,7 +205,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                     {isAnimating && (
                       <span className="flex items-center gap-1.5 text-[10px] sm:text-xs text-accent font-medium bg-accent/5 px-2 py-0.5 rounded-full">
                         <Loader2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 animate-spin" />
-                        かきじゅう...
+                        書いています
                       </span>
                     )}
                     {isDone && animState !== "idle" && (
@@ -217,7 +214,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                         animate={{ opacity: 1, scale: 1 }}
                         className="text-[10px] sm:text-xs text-primary/60 font-medium"
                       >
-                        ✓ おわり
+                        ✓ 完了（かんりょう）
                       </motion.span>
                     )}
                   </div>
@@ -233,7 +230,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
               animate={{ opacity: 1, y: 0 }}
             >
               <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
-                🎉 かんせい！じょうずにかけました。
+                🎉 完成（かんせい）！上手に書けました。
               </span>
             </motion.div>
           )}
@@ -251,12 +248,12 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
               {animState === "playing" ? (
                 <>
                   <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" />
-                  <span className="text-sm sm:text-lg">さいせいちゅう...</span>
+                  <span className="text-sm sm:text-lg">再生中（さいせいちゅう）...</span>
                 </>
               ) : (
                 <>
                   <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />
-                  <span className="text-sm sm:text-lg">かきじゅんをみる</span>
+                  <span className="text-sm sm:text-lg">書き順（かきじゅん）を見る</span>
                 </>
               )}
             </Button>
@@ -276,17 +273,16 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
           {/* Character breakdown — interactive */}
           <div className="pt-2 sm:pt-4 border-t border-border">
             <p className="text-[10px] sm:text-sm font-medium text-muted-foreground mb-2 sm:mb-4 text-center">
-              かんじをえらんで スタートできます
+              見たい漢字（かんじ）をえらんでください
             </p>
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
               {chars.map((char, index) => (
                 <button
                   key={index}
                   onClick={() => playSpecificChar(index)}
-                  disabled={animState === "playing"}
                   className={cn(
                     "flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl border-2 transition-all duration-300",
-                    "hover:border-accent hover:bg-accent/5 disabled:hover:border-border disabled:hover:bg-transparent",
+                    "hover:border-accent hover:bg-accent/5",
                     animState === "idle"
                       ? "border-border bg-card"
                       : doneChars.has(index)
@@ -295,7 +291,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
                       ? "border-accent/60 bg-accent/10 animate-pulse"
                       : "border-border bg-muted/30"
                   )}
-                  title={`${char}からスタート`}
+                  title={`${char}を表示`}
                 >
                   <span className="text-xl sm:text-3xl font-serif">{char}</span>
                 </button>
