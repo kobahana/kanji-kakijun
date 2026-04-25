@@ -46,10 +46,17 @@ export function KanjiStroke({
     if (measureRef.current) {
       const len = measureRef.current.getTotalLength()
       setPathLength(len)
+      
+      // CRITICAL: If this is the active stroke, hide it immediately after measurement
+      // to prevent the 1-frame "flash" of the full line.
+      if (animating) {
+        dashOffset.set(len)
+      }
+      
       const pt = measureRef.current.getPointAtLength(0)
       setNumberPos({ x: pt.x, y: pt.y })
     }
-  }, [pathData])
+  }, [pathData, animating, dashOffset])
 
   // Holds the framer-motion animation controls so we can stop on cleanup
   const animControls = useRef<{ stop: () => void } | null>(null)

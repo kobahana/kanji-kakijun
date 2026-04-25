@@ -118,7 +118,7 @@ export function KanjiDisplay({ prefecture }: KanjiDisplayProps) {
       <div className="flex-1 overflow-y-auto no-scrollbar flex flex-col p-4 sm:p-8 gap-4 sm:gap-8">
 
         {/* Top section: furigana + canvases + romaji */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-4 sm:gap-8 min-h-0 pt-2 sm:pt-0">
+        <div className="flex-1 flex flex-col items-center justify-start sm:justify-center gap-4 sm:gap-8 min-h-0 pt-6 sm:pt-10">
           {/* Furigana */}
           <p className="text-sm sm:text-2xl text-primary/70 tracking-[0.4em] sm:tracking-[0.6em] font-sans text-center">
             {prefecture.furigana}
