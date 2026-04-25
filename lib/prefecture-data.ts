@@ -48,7 +48,7 @@ export const regions: Region[] = [
       { name: "群馬県", romaji: "Gunma", furigana: "ぐんまけん", characters: ["群", "馬", "県"] },
       { name: "埼玉県", romaji: "Saitama", furigana: "さいたまけん", characters: ["埼", "玉", "県"] },
       { name: "千葉県", romaji: "Chiba", furigana: "ちばけん", characters: ["千", "葉", "県"] },
-      { name: "東京都", romaji: "Tokyo", furigana: "とうきょうと", characters: ["東", "京", "調"] },
+      { name: "東京都", romaji: "Tokyo", furigana: "とうきょうと", characters: ["東", "京", "都"] },
       { name: "神奈川県", romaji: "Kanagawa", furigana: "かながわけん", characters: ["神", "奈", "川", "県"] },
     ],
   },

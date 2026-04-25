@@ -42,18 +42,18 @@ export function PrefectureList({
           >
             <div className="flex flex-col items-start leading-tight">
               <span className="text-lg font-semibold text-foreground">
-                {prefecture.name
-                  .replace("県", "")
-                  .replace("都", "")
-                  .replace("府", "")
-                  .replace("道", "")}
+                {prefecture.name === "北海道" 
+                  ? "北海道" 
+                  : prefecture.name === "京都府"
+                  ? "京都"
+                  : prefecture.name.replace(/[県都府]$/, "")}
               </span>
               <span className="text-[10px] text-muted-foreground mt-0.5">
-                {prefecture.furigana
-                  .replace("けん", "")
-                  .replace("と", "")
-                  .replace("ふ", "")
-                  .replace("どう", "")}
+                {prefecture.name === "北海道"
+                  ? "ほっかいどう"
+                  : prefecture.name === "京都府"
+                  ? "きょうと"
+                  : prefecture.furigana.replace(/(けん|と|ふ)$/, "")}
               </span>
             </div>
           </button>
